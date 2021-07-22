@@ -5,7 +5,6 @@ on:
       - main # Default release branch
 jobs:
   deploy:
-    if: ${{ false }} # disable for now
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -29,8 +28,8 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: dotnet build --configuration Release src/Digitalroot.Valheim.ModName/Digitalroot.Valheim.ModName.csproj
+      - run: dotnet build --configuration Release src/Digitalroot.Valheim.Common.Core/Digitalroot.Valheim.Common.Core.csproj
       - name: Create the package
-        run: dotnet pack --configuration Release src/Digitalroot.Valheim.ModName/Digitalroot.Valheim.ModName.csproj
+        run: dotnet pack --configuration Release src/Digitalroot.Valheim.Common.Core/Digitalroot.Valheim.Common.Core.csproj
       - name: Publish the package to GPR
-        run: dotnet nuget push src/Digitalroot.Valheim.ModName/bin/Release/*.nupkg --skip-duplicate
+        run: dotnet nuget push src/Digitalroot.Valheim.Common.Core/bin/Release/*.nupkg --skip-duplicate

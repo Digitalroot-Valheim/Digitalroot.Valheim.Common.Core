@@ -1,2 +1,2 @@
-# Digitalroot.Valheim.ModTemplate
-Template for Valheim Mods
+# Digitalroot.Valheim.Common.Core
+Core for Valheim Mods
