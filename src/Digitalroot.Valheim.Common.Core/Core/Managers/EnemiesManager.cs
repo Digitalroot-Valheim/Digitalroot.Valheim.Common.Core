@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using Digitalroot.Valheim.Common.Core.Enums;
+﻿using Digitalroot.Valheim.Common.Core.Enums;
+using System.Reflection;
 
 namespace Digitalroot.Valheim.Common.Core.Managers
 {
