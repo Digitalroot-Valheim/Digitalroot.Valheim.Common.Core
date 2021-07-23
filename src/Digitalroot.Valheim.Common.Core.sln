@@ -23,17 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ico", "ico", "{962130CD-AB4E-4208-A538-E3566E13A95E}"
 	ProjectSection(SolutionItems) = preProject
-		ico\icon_greendot.gif = ico\icon_greendot.gif
-		ico\icon_reddot.gif = ico\icon_reddot.gif
-		ico\icon_yellowdot.gif = ico\icon_yellowdot.gif
-		ico\ValheimRcon.xcf = ico\ValheimRcon.xcf
 		ico\ValheimRcon_black.ico = ico\ValheimRcon_black.ico
 		ico\ValheimRcon_black.png = ico\ValheimRcon_black.png
-		ico\ValheimRcon_color.ico = ico\ValheimRcon_color.ico
-		ico\ValheimRcon_color.png = ico\ValheimRcon_color.png
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digitalroot.Valheim.Common.Core", "Digitalroot.Valheim.Common.Core\Digitalroot.Valheim.Common.Core.csproj", "{F58954B9-13B2-4799-B1D1-7736AE30077A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digitalroot.Valheim.Common.Core", "Digitalroot.Valheim.Common.Core\Digitalroot.Valheim.Common.Core.csproj", "{F58954B9-13B2-4799-B1D1-7736AE30077A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
