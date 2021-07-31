@@ -3,8 +3,9 @@ using System;
 
 namespace Digitalroot.Valheim.Common.Core
 {
-  public abstract class Singleton<TSingletonSubClass> where TSingletonSubClass : Singleton<TSingletonSubClass>, new()
+  public abstract class Singleton<TSingletonSubClass>  where TSingletonSubClass : Singleton<TSingletonSubClass>, new()
   {
+    // ReSharper disable once MemberCanBeProtected.Global
     public static TSingletonSubClass Instance => Nested._instance;
 
     [UsedImplicitly]
@@ -26,9 +27,7 @@ namespace Digitalroot.Valheim.Common.Core
         }
         catch (Exception ex)
         {
-          Log.Error(ex);
-          Log.Error($"Failed while initializing singleton of type: {typeof(TSingletonSubClass).FullName}: {ex.Message}");
-          throw;
+          throw new Exception($"Failed while initializing singleton of type: {typeof(TSingletonSubClass).FullName}: {ex.Message}", ex);
         }
         return instance;
       }

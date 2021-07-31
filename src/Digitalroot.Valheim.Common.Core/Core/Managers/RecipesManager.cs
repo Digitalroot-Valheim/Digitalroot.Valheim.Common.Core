@@ -10,22 +10,22 @@ namespace Digitalroot.Valheim.Common.Core.Managers
     #region AbstractManager
     protected override void OnInitialize()
     {
-      Log.Trace($"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
+      Log.Trace(this, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
       Initialize<Recipes>();
     }
 
     public override void ApplyCustomChanges()
     {
-      Log.Trace($"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
+      Log.Trace(this, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
       foreach (var keyValuePair in ManagerDictionary)
       {
         if (keyValuePair.Value is AbstractRecipe recipe)
         {
-          Log.Debug($"Trying to create: {recipe.RecipeName}");
+          Log.Debug(this, $"Trying to create: {recipe.RecipeName}");
           var r = CreateRecipe(recipe);
           if (r == null)
           {
-            Log.Debug($"[{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}] Failed to create recipe ({recipe.RecipeName})");
+            Log.Debug(this, $"[{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}] Failed to create recipe ({recipe.RecipeName})");
             continue;
           }
           AddNewRecipe(r);
@@ -35,37 +35,37 @@ namespace Digitalroot.Valheim.Common.Core.Managers
 
     protected override void LoadCustomChanges()
     {
-      Log.Trace($"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
+      Log.Trace(this, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
     }
 
     #endregion
 
     public void AddRecipe(AbstractRecipe abstractRecipe)
     {
-      Log.Trace($"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
+      Log.Trace(this, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
       if (ManagerDictionary.ContainsKey(abstractRecipe.RecipeName)) return;
       ManagerDictionary.Add(abstractRecipe.RecipeName, abstractRecipe);
     }
 
     private static void AddNewRecipe(global::Recipe recipe)
     {
-      Log.Trace($"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
+      Log.Trace(Instance, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
       if (ObjectDB.instance.m_recipes.RemoveAll(x => x.name == recipe.name) > 0)
       {
-        Log.Debug($"[{MethodBase.GetCurrentMethod().DeclaringType?.Name}] Removed recipe ({recipe.name})");
+        Log.Debug(Instance, $"[{MethodBase.GetCurrentMethod().DeclaringType?.Name}] Removed recipe ({recipe.name})");
       }
 
       ObjectDB.instance.m_recipes.Add(recipe);
-      Log.Debug($"[{MethodBase.GetCurrentMethod().DeclaringType?.Name}] Added recipe: {recipe.name}");
+      Log.Debug(Instance, $"[{MethodBase.GetCurrentMethod().DeclaringType?.Name}] Added recipe: {recipe.name}");
     }
 
     private static global::Recipe CreateRecipe(AbstractRecipe abstractRecipe)
     {
-      Log.Trace($"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
+      Log.Trace(Instance, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
       var itemPrefab = ObjectDB.instance.GetItemPrefab(abstractRecipe.Item.ItemId);
       if (itemPrefab == null)
       {
-        Log.Warning($"[{MethodBase.GetCurrentMethod().DeclaringType?.Name}] Could not find item prefab ({abstractRecipe.Item.ItemId})");
+        Log.Warning(Instance, $"[{MethodBase.GetCurrentMethod().DeclaringType?.Name}] Could not find item prefab ({abstractRecipe.Item.ItemId})");
         return null;
       }
 
@@ -97,7 +97,7 @@ namespace Digitalroot.Valheim.Common.Core.Managers
         var reqPrefab = ObjectDB.instance.GetItemPrefab(requirement.Item.ItemId);
         if (reqPrefab == null)
         {
-          Log.Error($"[{MethodBase.GetCurrentMethod().DeclaringType?.Name}] Could not find requirement item ({abstractRecipe.Name}): {requirement.Item.Name}");
+          Log.Error(Instance, $"[{MethodBase.GetCurrentMethod().DeclaringType?.Name}] Could not find requirement item ({abstractRecipe.Name}): {requirement.Item.Name}");
           continue;
         }
 
