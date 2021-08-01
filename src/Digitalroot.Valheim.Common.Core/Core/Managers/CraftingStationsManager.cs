@@ -12,6 +12,7 @@ namespace Digitalroot.Valheim.Common.Core.Managers
     
     private static void InitCraftingStations()
     {
+      ZLog.LogError($"[Digitalroot.Valheim.Common.Core.Managers.InitCraftingStations] Instance == null : {Instance == null}");
       Log.Trace(Instance, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
       if (_craftingStations == null)
       {
