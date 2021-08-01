@@ -11,8 +11,8 @@ namespace Digitalroot.Valheim.Common
   [UsedImplicitly]
   public sealed class GameObjectManager : Singleton<GameObjectManager>, ITraceableLogging
   {
-    // ReSharper disable once RedundantNameQualifier
-    private const string Namespace = nameof(Digitalroot.Valheim.Common);
+    // ReSharper disable once MemberCanBePrivate.Global
+    public const string Namespace = "Digitalroot.Valheim." + nameof(Common);
 
     public void Initialize()
     {
@@ -28,7 +28,7 @@ namespace Digitalroot.Valheim.Common
     #region RegisteredObjects
 
     // ReSharper disable once MemberCanBePrivate.Global
-    public readonly Dictionary<string, Dictionary<Enum, object>> RegisteredObjects = new Dictionary<string, Dictionary<Enum, object>>();
+    public readonly Dictionary<string, Dictionary<Enum, object>> RegisteredObjects = new();
 
     public static void RegisterObjects<TK>(Dictionary<Enum, object> dictionary)
       where TK : Enum
@@ -63,7 +63,8 @@ namespace Digitalroot.Valheim.Common
       return (DefaultRecipe) Get(value, Instance.RegisteredObjects[typeof(Recipes).ToString()]);
     }
 
-    public static CraftingStation Get(CraftingStations craftingStation)
+    // ReSharper disable once RedundantNameQualifier
+    public static global::CraftingStation Get(CraftingStations craftingStation)
     {
       Log.Trace(Instance, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
       Log.Trace(Instance, $"{craftingStation}");

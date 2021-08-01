@@ -8,6 +8,24 @@ namespace Digitalroot.Valheim.Common.Core.Managers
 {
   public class CraftingStationsManager : AbstractManager<CraftingStationsManager>
   {
+    private static Dictionary<string, CraftingStation> _craftingStations;
+    
+    private static void InitCraftingStations()
+    {
+      Log.Trace(Instance, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
+      if (_craftingStations == null)
+      {
+        _craftingStations = new Dictionary<string, CraftingStation>();
+        foreach (var recipe in ObjectDB.instance.m_recipes)
+        {
+          if (recipe.m_craftingStation != null && !_craftingStations.ContainsKey(recipe.m_craftingStation.name))
+          {
+            _craftingStations.Add(recipe.m_craftingStation.name, recipe.m_craftingStation);
+          }
+        }
+      }
+    }
+
     protected override void OnInitialize()
     {
       Log.Trace(this, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
@@ -74,27 +92,10 @@ namespace Digitalroot.Valheim.Common.Core.Managers
       Log.Debug(this, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
     }
 
-    private static Dictionary<string, CraftingStation> _craftingStations;
     public static void Reset()
     {
       Log.Trace(Instance, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
       _craftingStations = null;
-    }
-
-    private static void InitCraftingStations()
-    {
-      Log.Trace(Instance, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
-      if (_craftingStations == null)
-      {
-        _craftingStations = new Dictionary<string, CraftingStation>();
-        foreach (var recipe in ObjectDB.instance.m_recipes)
-        {
-          if (recipe.m_craftingStation != null && !_craftingStations.ContainsKey(recipe.m_craftingStation.name))
-          {
-            _craftingStations.Add(recipe.m_craftingStation.name, recipe.m_craftingStation);
-          }
-        }
-      }
     }
   }
 }
