@@ -9,11 +9,11 @@ namespace Digitalroot.Valheim.Common.Core.Managers
   public class CraftingStationsManager : AbstractManager<CraftingStationsManager>
   {
     private static Dictionary<string, CraftingStation> _craftingStations;
-    
+    private static StaticSourceLogger staticSourceLogger = new();
+
     private static void InitCraftingStations()
     {
-      ZLog.LogError($"[Digitalroot.Valheim.Common.Core.Managers.InitCraftingStations] Instance == null : {Instance == null}");
-      Log.Trace(Instance, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
+      Log.Trace(staticSourceLogger, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
       if (_craftingStations == null)
       {
         _craftingStations = new Dictionary<string, CraftingStation>();
