@@ -1,4 +1,5 @@
 ﻿using Digitalroot.Valheim.Common.Core.Enums;
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,11 +10,11 @@ namespace Digitalroot.Valheim.Common.Core.Managers
   public class CraftingStationsManager : AbstractManager<CraftingStationsManager>
   {
     private static Dictionary<string, CraftingStation> _craftingStations;
-    private static StaticSourceLogger staticSourceLogger = new();
+    private static readonly StaticSourceLogger StaticSourceLogger = new();
 
     private static void InitCraftingStations()
     {
-      Log.Trace(staticSourceLogger, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
+      Log.Trace(StaticSourceLogger, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
       if (_craftingStations == null)
       {
         _craftingStations = new Dictionary<string, CraftingStation>();
@@ -73,6 +74,7 @@ namespace Digitalroot.Valheim.Common.Core.Managers
     }
 
     [Conditional("DEBUG")]
+    [UsedImplicitly]
     public void Debug()
     {
       Log.Debug(this, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
@@ -93,6 +95,7 @@ namespace Digitalroot.Valheim.Common.Core.Managers
       Log.Debug(this, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
     }
 
+    [UsedImplicitly]
     public static void Reset()
     {
       Log.Trace(Instance, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");

@@ -14,6 +14,17 @@ namespace Digitalroot.Valheim.Common
     // ReSharper disable once MemberCanBePrivate.Global
     public const string Namespace = "Digitalroot.Valheim." + nameof(Common);
 
+    public GameObjectManager()
+    {
+#if DEBUG
+      EnableTrace = true;
+#else
+      EnableTrace = false;
+#endif
+      Log.RegisterSource(this);
+    }
+
+    [UsedImplicitly]
     public void Initialize()
     {
       Log.Trace(this, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
@@ -56,6 +67,7 @@ namespace Digitalroot.Valheim.Common
       return dictionary.ContainsKey(value) ? dictionary[value] : value.ToString();
     }
 
+    [UsedImplicitly]
     public static DefaultRecipe Get(Recipes value)
     {
       Log.Trace(Instance, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
@@ -77,6 +89,9 @@ namespace Digitalroot.Valheim.Common
 
     /// <inheritdoc />
     public string Source => Namespace;
+
+    /// <inheritdoc />
+    public bool EnableTrace { get; }
 
     #endregion
   }
