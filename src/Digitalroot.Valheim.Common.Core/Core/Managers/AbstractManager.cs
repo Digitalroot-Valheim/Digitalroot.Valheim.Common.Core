@@ -16,6 +16,12 @@ namespace Digitalroot.Valheim.Common.Core.Managers
 
     protected AbstractManager()
     {
+#if DEBUG
+      EnableTrace = true;
+#else
+      EnableTrace = false;
+#endif
+      Log.RegisterSource(this);
       Log.Trace(this, $"{Namespace}.{MethodBase.GetCurrentMethod().DeclaringType?.Name}.{MethodBase.GetCurrentMethod().Name}");
       Log.Trace(this, $"IsInitialized: {IsInitialized}");
       if (IsInitialized) return;
@@ -52,6 +58,9 @@ namespace Digitalroot.Valheim.Common.Core.Managers
 
     /// <inheritdoc />
     public string Source => Namespace;
+
+    /// <inheritdoc />
+    public bool EnableTrace { get; }
 
     #endregion
   }
