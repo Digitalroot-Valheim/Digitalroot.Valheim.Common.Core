@@ -19,7 +19,7 @@ namespace Digitalroot.Valheim.Common
 #if DEBUG
       EnableTrace = true;
 #else
-      EnableTrace = false;
+      EnableTrace = false; 
 #endif
       Log.RegisterSource(this);
     }
